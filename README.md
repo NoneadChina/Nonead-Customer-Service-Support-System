@@ -1,5 +1,7 @@
 # NoneadCSS - 拓德客户服务与支持系统
 
+English version: [README.en.md](README.en.md)
+
 > **版本 v2.3.0 · 2026-10-23**（当前开发批次：Messenger / Telegram / LINE / iMessage 四个新 IM 渠道 + 微信客服直连 + 全站中英双语 OpenAPI + 开源准备；批次细节见 `CHANGELOG.md` 的 Unreleased 段，尚未打 tag）
 
 NoneadCSS (nCSS) 是一个基于 .NET 10 构建的现代化客户服务与支持系统，提供完整的工单管理、邮箱集成、工作流自动化等功能，覆盖 Email、在线聊天、微信公众号、WhatsApp、Messenger、Telegram、LINE、iMessage、钉钉、飞书等 10+ 客户渠道。
@@ -324,7 +326,7 @@ powershell.exe -ExecutionPolicy Bypass -File C:\noneadcss\Production\start-prod.
 #### 方式二：API Key（推荐第三方集成使用）
 
 1. 在系统后台创建 API Key
-2. 在请求头中添加 `X-Api-Key: <your-api-key>
+2. 在请求头中添加 `X-Api-Key: <your-api-key>`
 3. 系统自动完成认证并记录调用日志
 
 ### 国际化
@@ -644,7 +646,11 @@ node scripts/i18n/api-message-dictionary.mjs coverage        # 响应出口词�
 
 ## 许可证
 
-AGPL-3.0 License
+**按用户规模的双重许可（User-Segmented Dual Licensing）**，完整条款见 [LICENSE](LICENSE)：
+
+- **个人用户与 3 人及以下组织**：适用 AGPL-3.0。
+- **超过 3 人的组织**：**必须**获取商业许可证，联系 `service@nonead.com`。
+- 无论组织规模，若无法满足 AGPLv3 的源码公开义务（分发修改版、或以网络服务形式提供），同样需要获取商业许可证。
 
 ---
 
