@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="LoginFailed" xml:space="preserve"><value>Invalid email or password</value></data>
+  <data name="LogoutSuccess" xml:space="preserve"><value>Logged out successfully</value></data>
+  <data name="ConversationNotFound" xml:space="preserve"><value>Conversation not found</value></data>
+  <data name="UserNotFound" xml:space="preserve"><value>User not found</value></data>
+  <data name="MailboxNotFound" xml:space="preserve"><value>Mailbox not found</value></data>
+  <data name="CustomerNotFound" xml:space="preserve"><value>Customer not found</value></data>
+  <data name="DraftNotFound" xml:space="preserve"><value>Draft not found</value></data>
+  <data name="Unauthorized" xml:space="preserve"><value>Unauthorized access</value></data>
+  <data name="Forbidden" xml:space="preserve"><value>You do not have permission to perform this action</value></data>
+  <data name="ValidationError" xml:space="preserve"><value>Validation failed</value></data>
+  <data name="EmailAlreadyExists" xml:space="preserve"><value>Email already exists</value></data>
+  <data name="ConversationCreated" xml:space="preserve"><value>Conversation created successfully</value></data>
+  <data name="ConversationUpdated" xml:space="preserve"><value>Conversation updated successfully</value></data>
+  <data name="ConversationDeleted" xml:space="preserve"><value>Conversation deleted successfully</value></data>
+  <data name="UserCreated" xml:space="preserve"><value>User created successfully</value></data>
+  <data name="UserUpdated" xml:space="preserve"><value>User updated successfully</value></data>
+  <data name="UserDeleted" xml:space="preserve"><value>User deleted successfully</value></data>
+  <data name="StatusActive" xml:space="preserve"><value>Active</value></data>
+  <data name="StatusPending" xml:space="preserve"><value>Pending</value></data>
+  <data name="StatusClosed" xml:space="preserve"><value>Closed</value></data>
+  <data name="StatusSpam" xml:space="preserve"><value>Spam</value></data>
+  <data name="RoleAdmin" xml:space="preserve"><value>Administrator</value></data>
+  <data name="RoleUser" xml:space="preserve"><value>User</value></data>
+  <!-- 补齐 zh-Hans 已有而中性（英文）缺失的三个键：缺键时英文界面会直出键名本身 -->
+  <data name="RoleAgentSupervisor" xml:space="preserve"><value>Agent supervisor</value></data>
+  <data name="RoleAgent" xml:space="preserve"><value>Agent</value></data>
+  <data name="ThreadTypeCustomer" xml:space="preserve"><value>Customer Message</value></data>
+  <data name="ThreadTypeMessage" xml:space="preserve"><value>Reply</value></data>
+  <data name="ThreadTypeNote" xml:space="preserve"><value>Internal Note</value></data>
+  <data name="FolderUnassigned" xml:space="preserve"><value>Unassigned</value></data>
+  <data name="FolderMine" xml:space="preserve"><value>Mine</value></data>
+  <data name="FolderClosed" xml:space="preserve"><value>Closed</value></data>
+  <data name="WelcomeMessage" xml:space="preserve"><value>Welcome to NoneadCSS API</value></data>
+  <data name="ApiDescription" xml:space="preserve"><value>NoneadCSS Customer Support System API</value></data>
+  <data name="NoFileSelected" xml:space="preserve"><value>No file selected</value></data>
+  <data name="AttachmentNotFound" xml:space="preserve"><value>Attachment not found</value></data>
+  <data name="FileNotExists" xml:space="preserve"><value>File does not exist</value></data>
+  <data name="InvalidCredentials" xml:space="preserve"><value>Invalid credentials</value></data>
+  <data name="MailboxAlreadyExists" xml:space="preserve"><value>Mailbox already exists</value></data>
+  <data name="MailboxCreated" xml:space="preserve"><value>Mailbox created successfully</value></data>
+  <data name="MailboxUpdated" xml:space="preserve"><value>Mailbox updated successfully</value></data>
+  <data name="MailboxDeleted" xml:space="preserve"><value>Mailbox deleted successfully</value></data>
+  <!-- 系统工具（SystemController）：批次 12 后端消息本地化的首批站点，均已活体验证英文界面此前直出中文 -->
+  <data name="SystemCacheCleared" xml:space="preserve"><value>Cache cleared</value></data>
+  <data name="SystemForceLogoutSuccess" xml:space="preserve"><value>All signed-in sessions have been revoked (affected users: {0}); every session is invalidated on its next request.</value></data>
+  <data name="SystemClearLogsSuccess" xml:space="preserve"><value>Log cleanup finished (cleared files: {0}, freed bytes: {1}).</value></data>
+  <data name="SystemClearLogsPartial" xml:space="preserve"><value>Log cleanup finished with locked files (cleared: {0}, skipped: {1}).</value></data>
+  <!-- 系统工具：健康检查与数据库优化（同一页面的其余直出中文） -->
+  <data name="HealthCheckDbName" xml:space="preserve"><value>Database connection</value></data>
+  <data name="HealthCheckDbOk" xml:space="preserve"><value>SQLite connection OK</value></data>
+  <data name="HealthCheckDbFail" xml:space="preserve"><value>Database connection failed. See the system log for details.</value></data>
+  <data name="HealthCheckMailboxName" xml:space="preserve"><value>Mailbox configuration</value></data>
+  <data name="HealthCheckMailboxOk" xml:space="preserve"><value>Active mailboxes: {0}</value></data>
+  <data name="HealthCheckMailboxFail" xml:space="preserve"><value>Mailbox configuration query failed. See the system log for details.</value></data>
+  <data name="HealthCheckWebhookName" xml:space="preserve"><value>Webhook configuration</value></data>
+  <data name="HealthCheckWebhookOk" xml:space="preserve"><value>Active webhooks: {0}</value></data>
+  <data name="HealthCheckWebhookFail" xml:space="preserve"><value>Webhook configuration query failed. See the system log for details.</value></data>
+  <data name="SystemDbOptimized" xml:space="preserve"><value>Database optimized</value></data>
+  <!-- 响应信封（ApiResponseWrapperFilter / ApiResponse）：每个响应都携带 message，此前恒为中文 -->
+  <data name="ApiSuccess" xml:space="preserve"><value>Success</value></data>
+  <data name="ApiErrorBadRequest" xml:space="preserve"><value>Invalid request parameters</value></data>
+  <data name="ApiErrorUnauthorized" xml:space="preserve"><value>Unauthorized</value></data>
+  <data name="ApiErrorForbidden" xml:space="preserve"><value>Forbidden</value></data>
+  <data name="ApiErrorNotFound" xml:space="preserve"><value>Resource not found</value></data>
+  <data name="ApiErrorConflict" xml:space="preserve"><value>Conflict</value></data>
+  <data name="ApiErrorTooManyRequests" xml:space="preserve"><value>Too many requests</value></data>
+  <data name="ApiErrorInternalServer" xml:space="preserve"><value>Internal server error</value></data>
+  <data name="ApiErrorGeneric" xml:space="preserve"><value>Operation failed</value></data>
+  <!-- 附件预览/下载的端点级文案（端点自带 { message } 体，虽 SkipApiResponseWrapper 但同样面向用户） -->
+  <data name="AttachmentPreviewImageOnly" xml:space="preserve"><value>Only image attachments can be previewed</value></data>
+  <!-- 服务端标签目录（批次 13）：密码策略可读项 + SLA 违规类型/状态。英文措辞与前端 en 词条一致（settings.password.rule.* / automation.sla.violationType.* / automation.sla.status.*），避免出现两套英文 -->
+  <data name="PolicyMinLength" xml:space="preserve"><value>At least {0} characters</value></data>
+  <data name="PolicyRequireUppercase" xml:space="preserve"><value>At least one uppercase letter (A-Z)</value></data>
+  <data name="PolicyRequireLowercase" xml:space="preserve"><value>At least one lowercase letter (a-z)</value></data>
+  <data name="PolicyRequireDigit" xml:space="preserve"><value>At least one digit (0-9)</value></data>
+  <data name="PolicyRequireSymbol" xml:space="preserve"><value>At least one special character (!@#$%^&amp;*...)</value></data>
+  <data name="PolicyForbidWeakPassword" xml:space="preserve"><value>Must not be a common weak password</value></data>
+  <data name="PolicyForbidCommonPatterns" xml:space="preserve"><value>Must not contain simple patterns (sequential numbers/letters, repeated characters, keyboard rows)</value></data>
+  <data name="SlaViolationTypeFirstResponse" xml:space="preserve"><value>First response</value></data>
+  <data name="SlaViolationTypeResolution" xml:space="preserve"><value>Resolution time</value></data>
+  <data name="SlaViolationStatusWarning" xml:space="preserve"><value>Warning</value></data>
+  <data name="SlaViolationStatusBreached" xml:space="preserve"><value>Breached</value></data>
+  <data name="SlaViolationStatusResolved" xml:space="preserve"><value>Resolved</value></data>
+  <!-- 下拉/概览标签目录（批次 14）：日历、知识库、在线客服、发送日志、渠道。英文措辞复用前端 en 词条（calendar.store.eventType/status、knowledge.status、chat.status、data.sendLogs.status|mailType），避免出现两套英文 -->
+  <data name="CalendarEventType_due_date" xml:space="preserve"><value>Due date</value></data>
+  <data name="CalendarEventType_task" xml:space="preserve"><value>Task</value></data>
+  <data name="CalendarEventType_meeting" xml:space="preserve"><value>Meeting</value></data>
+  <data name="CalendarEventType_reminder" xml:space="preserve"><value>Reminder</value></data>
+  <data name="CalendarStatus_pending" xml:space="preserve"><value>Pending</value></data>
+  <data name="CalendarStatus_completed" xml:space="preserve"><value>Completed</value></data>
+  <data name="CalendarStatus_cancelled" xml:space="preserve"><value>Cancelled</value></data>
+  <data name="KnowledgeStatus_draft" xml:space="preserve"><value>Draft</value></data>
+  <data name="KnowledgeStatus_published" xml:space="preserve"><value>Published</value></data>
+  <data name="KnowledgeStatus_archived" xml:space="preserve"><value>Archived</value></data>
+  <data name="ChatStatus_waiting" xml:space="preserve"><value>Waiting</value></data>
+  <data name="ChatStatus_active" xml:space="preserve"><value>Active</value></data>
+  <data name="ChatStatus_closed" xml:space="preserve"><value>Closed</value></data>
+  <data name="ChatStatus_transferred" xml:space="preserve"><value>Converted to conversation</value></data>
+  <data name="SendLogStatus_1" xml:space="preserve"><value>Received</value></data>
+  <data name="SendLogStatus_2" xml:space="preserve"><value>Send error</value></data>
+  <data name="SendLogStatus_4" xml:space="preserve"><value>Delivered</value></data>
+  <data name="SendLogStatus_5" xml:space="preserve"><value>Delivery failed</value></data>
+  <data name="SendLogStatus_6" xml:space="preserve"><value>Opened</value></data>
+  <data name="SendLogStatus_7" xml:space="preserve"><value>Clicked</value></data>
+  <data name="SendLogStatus_8" xml:space="preserve"><value>Unsubscribed</value></data>
+  <data name="SendLogStatus_9" xml:space="preserve"><value>Complained</value></data>
+  <data name="SendLogStatus_10" xml:space="preserve"><value>Send interrupted</value></data>
+  <data name="SendLogStatus_unknown" xml:space="preserve"><value>Unknown</value></data>
+  <data name="SendLogMailType_1" xml:space="preserve"><value>Customer reply</value></data>
+  <data name="SendLogMailType_2" xml:space="preserve"><value>User notification</value></data>
+  <data name="SendLogMailType_3" xml:space="preserve"><value>Auto reply</value></data>
+  <data name="SendLogMailType_4" xml:space="preserve"><value>Invite</value></data>
+  <data name="SendLogMailType_5" xml:space="preserve"><value>Password changed</value></data>
+  <data name="SendLogMailType_6" xml:space="preserve"><value>Wrong user email</value></data>
+  <data name="SendLogMailType_7" xml:space="preserve"><value>Test</value></data>
+  <data name="SendLogMailType_8" xml:space="preserve"><value>Alert</value></data>
+  <data name="SendLogMailType_10" xml:space="preserve"><value>Calendar reminder</value></data>
+  <data name="SendLogMailType_unknown" xml:space="preserve"><value>Unknown</value></data>
+  <data name="Channel_email" xml:space="preserve"><value>Email</value></data>
+  <data name="Channel_web" xml:space="preserve"><value>Web</value></data>
+  <data name="Channel_api" xml:space="preserve"><value>API</value></data>
+  <data name="Channel_phone" xml:space="preserve"><value>Phone</value></data>
+  <data name="Channel_chat" xml:space="preserve"><value>Live chat</value></data>
+  <data name="Channel_social" xml:space="preserve"><value>Social</value></data>
+  <data name="Channel_wechat" xml:space="preserve"><value>WeChat</value></data>
+  <data name="Channel_whatsapp" xml:space="preserve"><value>WhatsApp</value></data>
+  <data name="Channel_feishu" xml:space="preserve"><value>Feishu</value></data>
+  <data name="Channel_dingtalk" xml:space="preserve"><value>DingTalk</value></data>
+  <data name="Channel_messenger" xml:space="preserve"><value>Messenger</value></data>
+  <data name="Channel_telegram" xml:space="preserve"><value>Telegram</value></data>
+  <data name="Channel_line" xml:space="preserve"><value>LINE</value></data>
+  <data name="Channel_imessage" xml:space="preserve"><value>Apple Messages</value></data>
+  <data name="Channel_global" xml:space="preserve"><value>All channels</value></data>
+  <!-- SLA 时长度量（批次 14）：数字一律走 {0}/{1} 槽位，词条内不固化具体数字 -->
+  <data name="SlaDurationZero" xml:space="preserve"><value>0 min</value></data>
+  <data name="SlaDurationMinutes" xml:space="preserve"><value>{0} min</value></data>
+  <data name="SlaDurationHours" xml:space="preserve"><value>{0} h</value></data>
+  <data name="SlaDurationHoursMinutes" xml:space="preserve"><value>{0}h {1}m</value></data>
+  <data name="SlaDurationDays" xml:space="preserve"><value>{0} d</value></data>
+  <data name="SlaDurationDaysHours" xml:space="preserve"><value>{0}d {1}h</value></data>
+  <!-- 密码校验失败原因（批次 14）：整句形式，与 settings.password.rule.* 的名词式要求清单区分 -->
+  <data name="PolicyErrorMinLength" xml:space="preserve"><value>Password must be at least {0} characters</value></data>
+  <data name="PolicyErrorRequireUppercase" xml:space="preserve"><value>Password must contain at least one uppercase letter</value></data>
+  <data name="PolicyErrorRequireLowercase" xml:space="preserve"><value>Password must contain at least one lowercase letter</value></data>
+  <data name="PolicyErrorRequireDigit" xml:space="preserve"><value>Password must contain at least one digit</value></data>
+  <data name="PolicyErrorRequireSymbol" xml:space="preserve"><value>Password must contain at least one special character</value></data>
+  <data name="PolicyErrorTooCommon" xml:space="preserve"><value>Password is too common, please choose a stronger one</value></data>
+  <data name="PolicyErrorWeakPattern" xml:space="preserve"><value>Password contains a too-simple pattern, please choose a stronger one</value></data>
+  <data name="ImportEntity_customers" xml:space="preserve">
+    <value>Customers</value>
+  </data>
+  <data name="ImportEntityDesc_customers" xml:space="preserve">
+    <value>Customer contact information</value>
+  </data>
+  <data name="ImportEntity_tags" xml:space="preserve">
+    <value>Tags</value>
+  </data>
+  <data name="ImportEntityDesc_tags" xml:space="preserve">
+    <value>Conversation tags</value>
+  </data>
+  <data name="ImportEntity_canned_responses" xml:space="preserve">
+    <value>Canned responses</value>
+  </data>
+  <data name="ImportEntityDesc_canned_responses" xml:space="preserve">
+    <value>Canned response templates</value>
+  </data>
+  <data name="ImportEntity_mail_templates" xml:space="preserve">
+    <value>Mail templates</value>
+  </data>
+  <data name="ImportEntityDesc_mail_templates" xml:space="preserve">
+    <value>Email notification templates</value>
+  </data>
+  <data name="ImportEntity_email_signatures" xml:space="preserve">
+    <value>Email signatures</value>
+  </data>
+  <data name="ImportEntityDesc_email_signatures" xml:space="preserve">
+    <value>Mailbox signatures</value>
+  </data>
+  <data name="ImportEntity_conversations" xml:space="preserve">
+    <value>Conversations</value>
+  </data>
+  <data name="ImportEntityDesc_conversations" xml:space="preserve">
+    <value>Conversation list (bodies and attachments excluded)</value>
+  </data>
+  <data name="ImportEntity_knowledge_articles" xml:space="preserve">
+    <value>Knowledge base articles</value>
+  </data>
+  <data name="ImportEntityDesc_knowledge_articles" xml:space="preserve">
+    <value>Article title / category / status / body (Markdown text)</value>
+  </data>
+  <data name="ImportEntity_users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="ImportEntityDesc_users" xml:space="preserve">
+    <value>System users</value>
+  </data>
+  <data name="CalendarSubscriptionInstructions" xml:space="preserve">
+    <value>In Outlook: File &gt; Open and Export &gt; Manage Subscriptions &gt; Add Subscription &gt; paste this URL. Note: this URL contains your subscription token, so do not share it with others.</value>
+  </data>
+</root>

@@ -1,0 +1,67 @@
+# ============================================================
+# NoneadCSS Docker Compose 离线安装配置
+# 适用场景：目标服务器无外网（或 Docker Hub 不可达）时的离线部署
+#
+# 与在线版 docker-compose.yml 的关键区别：
+#   1. 无 build 段 —— 使用本地已加载的镜像 noneadcss:latest（见 install 脚本的 docker load）
+#   2. pull_policy: never —— 永不尝试联网拉取镜像
+#   3. 移除 init-data 服务 —— 不再依赖宿主机上的固定部署目录；
+#      首次启动时由应用自身通过 EF Migrate 自动创建全新数据库
+#      （如需导入既有生产数据，见 README.md「导入既有数据」章节）
+#
+# 用法：
+#   cd "Offline Docker\compose"
+#   # Windows:  .\install.ps1
+#   # Linux:    ./install.sh
+# ============================================================
+
+services:
+  noneadcss:
+    # 离线模式：镜像必须在安装前通过 docker load 加载到本地（install 脚本已处理）
+    image: noneadcss:latest
+    pull_policy: never
+    container_name: noneadcss-prod
+    ports:
+      - "${HOST_PORT:-5173}:5000"
+    volumes:
+      # 数据目录：Docker named volume（WSL2 后端兼容性最佳，持久化在 volume 中）
+      - noneadcss-data:/app/Data
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:5000
+      # ===== 基础服务配置 =====
+      - Database__UseSqlite=true
+      - DB__SkipBackupBeforeMigrate=${DB__SkipBackupBeforeMigrate:-false}
+      # 不使用 Cache=Shared：共享缓存走表级锁抛 SQLITE_LOCKED，busy_timeout 不覆盖该错误码
+      - ConnectionStrings__SqliteConnection=Data Source=/app/Data/noneadcss.db;Mode=ReadWriteCreate
+      - Attachment__UploadPath=Data/Attachments
+      - ForwardedHeaders__KnownProxies=${ForwardedHeaders__KnownProxies:-172.17.0.1}
+      # ===== 密钥（从 .env 注入，镜像内不写死） =====
+      - JWT__Key=${JWT__Key}
+      - JWT__Issuer=${JWT__Issuer:-NoneadCSS}
+      - JWT__Audience=${JWT__Audience:-NoneadCSSUsers}
+      - ENCRYPTION__Key=${ENCRYPTION__Key}
+      - ENCRYPTION__LegacySha256Key=${ENCRYPTION__LegacySha256Key:-}
+      - AUDIT__HmacKey=${AUDIT__HmacKey}
+      - APP__SatisfactionTokenKey=${APP__SatisfactionTokenKey}
+      - SECRET_HASHER__Key=${SECRET_HASHER__Key}
+      # ===== 首次启动管理员（仅 Users 表为空时生效） =====
+      - ADMIN_EMAIL=${ADMIN_EMAIL}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    stop_grace_period: 30s
+    restart: unless-stopped
+    # 命令行参数优先级最高，覆盖 appsettings.Production.json 中固定的 "Urls": "http://127.0.0.1:5009"
+    command: ["dotnet", "NoneadCSS.Api.dll", "--Urls", "http://+:5000"]
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "-o", "/dev/null", "--data-binary", "", "http://127.0.0.1:5000/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 60s
+      retries: 3
+
+volumes:
+  noneadcss-data:
+    # external: 该命名卷由 install 脚本的 `docker volume create` 创建并初始化种子库，
+    # 声明为外部卷可避免 compose 对"已存在但非本 compose 创建"的卷输出 warning。
+    external: true
+    name: noneadcss-data

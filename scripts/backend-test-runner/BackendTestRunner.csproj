@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!--
+    后端测试执行器（进程内 xunit）。
+
+    存在理由：本机 dotnet test / dotnet vstest 恒失败
+    （testhost 打开 vstest.console 父进程句柄 -> Win32Exception(5) Access denied），
+    详见同目录 README.md。本工程不进 NoneadCSS.slnx，不参与常规 dotnet build / CI。
+
+    构建（输出必须落到测试输出目录，否则依赖解析不到）：
+      dotnet build scripts/backend-test-runner/BackendTestRunner.csproj -c Release `
+        -o NoneadCSS.Tests/bin/Release/net10.0
+  -->
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <AssemblyName>BackendTestRunner</AssemblyName>
+    <RootNamespace>NoneadCSS.BackendTestRunner</RootNamespace>
+    <LangVersion>latest</LangVersion>
+    <!-- 统一用 dotnet <dll> 运行，不生成 apphost -->
+    <UseAppHost>false</UseAppHost>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      关键：测试程序集依赖 ASP.NET Core 共享框架（Microsoft.Extensions.*、
+      Microsoft.AspNetCore.* 都在其中）。普通控制台应用默认只加载
+      Microsoft.NETCore.App，会导致测试程序集几乎所有引用 FileNotFoundException。
+    -->
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- 版本需与 NoneadCSS.Tests 引用的一致，否则执行引擎与测试程序集对不上 -->
+    <PackageReference Include="xunit.core" Version="2.9.3" />
+    <PackageReference Include="xunit.abstractions" Version="2.0.3" />
+    <PackageReference Include="xunit.extensibility.core" Version="2.9.3" />
+    <PackageReference Include="xunit.extensibility.execution" Version="2.9.3" />
+    <PackageReference Include="xunit.assert" Version="2.9.3" />
+  </ItemGroup>
+
+</Project>

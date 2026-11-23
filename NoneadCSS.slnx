@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="NoneadCSS.Api/NoneadCSS.Api.csproj" />
+  <Project Path="NoneadCSS.Application/NoneadCSS.Application.csproj" />
+  <Project Path="NoneadCSS.Domain/NoneadCSS.Domain.csproj" />
+  <Project Path="NoneadCSS.Infrastructure/NoneadCSS.Infrastructure.csproj" />
+  <Project Path="NoneadCSS.Tests/NoneadCSS.Tests.csproj" />
+</Solution>

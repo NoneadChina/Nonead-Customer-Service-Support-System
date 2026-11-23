@@ -1,0 +1,63 @@
+# 生产构建 Dockerfile（支持镜像源注入，默认与官方 Dockerfile 一致）
+# 用法 1（默认，能直连 Docker Hub 的环境）：
+#   docker build -t noneadcss:latest -f Dockerfile.prod .
+# 用法 2（国内环境，替换前端基础镜像）：
+#   docker build --build-arg FRONTEND_BASE=docker.m.daocloud.io/library/node:20-alpine \
+#                --build-arg SDK_BASE=mcr.microsoft.com/dotnet/sdk:10.0 \
+#                --build-arg RUNTIME_BASE=mcr.microsoft.com/dotnet/aspnet:10.0 \
+#                -t noneadcss:latest -f Dockerfile.prod .
+
+ARG FRONTEND_BASE=node:20-alpine
+ARG SDK_BASE=mcr.microsoft.com/dotnet/sdk:10.0
+ARG RUNTIME_BASE=mcr.microsoft.com/dotnet/aspnet:10.0
+
+# ========== 阶段 1: 构建前端 ==========
+FROM ${FRONTEND_BASE} AS frontend-build
+WORKDIR /app/frontend
+COPY frontend/package*.json ./
+RUN npm ci
+COPY frontend/ .
+RUN npm run build
+
+# ========== 阶段 2: 构建后端 ==========
+FROM ${SDK_BASE} AS backend-build
+WORKDIR /app
+COPY NoneadCSS.Api/NoneadCSS.Api.csproj NoneadCSS.Api/
+COPY NoneadCSS.Application/NoneadCSS.Application.csproj NoneadCSS.Application/
+COPY NoneadCSS.Domain/NoneadCSS.Domain.csproj NoneadCSS.Domain/
+COPY NoneadCSS.Infrastructure/NoneadCSS.Infrastructure.csproj NoneadCSS.Infrastructure/
+RUN dotnet restore NoneadCSS.Api/NoneadCSS.Api.csproj
+COPY . .
+COPY --from=frontend-build /app/frontend/dist NoneadCSS.Api/wwwroot
+# 不用 --no-restore：restore 层与 publish 层的 NuGet FallbackPackagePathResolver 的
+# userPackageFolder 上下文不同，--no-restore 会报 MSB4018。
+RUN dotnet publish NoneadCSS.Api/NoneadCSS.Api.csproj -c Release -o /app/publish
+
+# ========== 阶段 3: 运行时 ==========
+FROM ${RUNTIME_BASE} AS runtime
+WORKDIR /app
+
+RUN groupadd --system appgroup && useradd --system --gid appgroup --shell /usr/sbin/nologin --home-dir /app appuser
+RUN mkdir -p /app/Data /app/wwwroot && chown -R appuser:appgroup /app
+
+# 安装 curl 用于 HEALTHCHECK（aspnet slim 基础镜像默认未提供）
+RUN apt-get update && apt-get install -y --no-install-recommends curl && rm -rf /var/lib/apt/lists/*
+
+COPY --from=backend-build /app/publish .
+RUN chown -R appuser:appgroup /app
+
+USER appuser
+
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV ASPNETCORE_URLS=http://+:5000
+ENV Attachment__UploadPath=Data/Attachments
+ENV ForwardedHeaders__KnownProxies=
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+  CMD curl --silent --fail --data-binary "" http://127.0.0.1:5000/health || exit 1
+
+EXPOSE 5000
+
+VOLUME ["/app/Data"]
+
+ENTRYPOINT ["dotnet", "NoneadCSS.Api.dll"]

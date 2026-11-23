@@ -1,0 +1,653 @@
+@import './pages/calendar/animations.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ========== 全局动画 Keyframes ========== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.92);
+  }
+  60% {
+    transform: translateY(-2px) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulseRing {
+  0% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4); }
+  70% { box-shadow: 0 0 0 14px rgba(99, 102, 241, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(99, 102, 241, 0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ========== 自定义滚动条（精致风格） ========== */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 4px 0;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #cbd5e1 0%, #94a3b8 100%);
+  border-radius: 999px;
+  transition: background 0.2s;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #94a3b8 0%, #64748b 100%);
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #475569 0%, #334155 100%);
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #64748b 0%, #475569 100%);
+}
+
+/* ========== 隐藏滚动条（Tab 导航横向滚动） ========== */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.dark {
+  color-scheme: dark;
+}
+
+.dark body {
+  background-color: #0f172a;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* ===== 知识库文章阅读器排版 ===== */
+.knowledge-content {
+  font-feature-settings: "kern" 1, "liga" 1;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.knowledge-content > *:first-child {
+  margin-top: 0;
+}
+
+.knowledge-content > *:last-child {
+  margin-bottom: 0;
+}
+
+.knowledge-content p {
+  margin: 0.85em 0;
+}
+
+.knowledge-content h1 {
+  margin: 1.6em 0 0.8em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid theme('colors.slate.200');
+  font-size: 1.6em;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.knowledge-content h2 {
+  margin: 1.5em 0 0.7em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid theme('colors.slate.100');
+  font-size: 1.4em;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.knowledge-content h3 {
+  margin: 1.3em 0 0.6em;
+  font-size: 1.2em;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.knowledge-content ul {
+  margin: 0.7em 0;
+  padding-left: 1.6em;
+  list-style-type: disc;
+}
+
+.knowledge-content ol {
+  margin: 0.7em 0;
+  padding-left: 1.6em;
+  list-style-type: decimal;
+}
+
+/* 嵌套列表：二级无序列表使用圈，三级使用方块，有序列表按层级复位 */
+.knowledge-content ul ul {
+  list-style-type: circle;
+}
+
+.knowledge-content ul ul ul {
+  list-style-type: square;
+}
+
+.knowledge-content ol ol {
+  list-style-type: lower-roman;
+}
+
+.knowledge-content li {
+  margin: 0.3em 0;
+  /* 修复 Tailwind + Renderer 自定义 li class 导致的项目符号被挤出/隐藏问题：
+     - 显式保留项目符号显示，并要求在内容外绘制
+     - 与 Renderer 中 listitem 的 ml-? 类共存时不丢失符号 */
+  list-style-position: outside;
+  display: list-item;
+}
+
+/* 列表内段落/块级元素压缩上下间距，避免与行间距重叠 */
+.knowledge-content li > p:first-child {
+  margin-top: 0.2em;
+}
+.knowledge-content li > p:last-child {
+  margin-bottom: 0.2em;
+}
+
+/* 任务列表（GFM task list）：去掉默认项目符号，与 Renderer 中 checkbox 风格一致 */
+.knowledge-content li:has(> input[type="checkbox"]:first-child) {
+  list-style-type: none;
+  margin-left: -0.2em;
+}
+
+/* ===== Markdown 常见内联元素完整排版 ===== */
+.knowledge-content strong,
+.knowledge-content b {
+  font-weight: 700;
+  color: inherit;
+}
+
+.knowledge-content em,
+.knowledge-content i {
+  font-style: italic;
+  color: inherit;
+}
+
+.knowledge-content del,
+.knowledge-content s {
+  text-decoration: line-through;
+  opacity: 0.75;
+}
+
+.knowledge-content ins,
+.knowledge-content u {
+  text-decoration: underline;
+  text-decoration-color: theme('colors.blue.400');
+  text-underline-offset: 2px;
+}
+
+.knowledge-content mark {
+  background: theme('colors.yellow.200');
+  color: theme('colors.slate.900');
+  padding: 0.05em 0.2em;
+  border-radius: 3px;
+}
+
+.knowledge-content kbd {
+  padding: 0.1em 0.35em;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.82em;
+  background: theme('colors.slate.100');
+  border: 1px solid theme('colors.slate.300');
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  color: theme('colors.slate.700');
+}
+
+.knowledge-content small {
+  font-size: 0.85em;
+  color: theme('colors.slate.500');
+}
+
+.knowledge-content sub,
+.knowledge-content sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+.knowledge-content sup { top: -0.5em; }
+.knowledge-content sub { bottom: -0.25em; }
+
+.knowledge-content abbr[title] {
+  border-bottom: 1px dotted theme('colors.slate.400');
+  cursor: help;
+  text-decoration: none;
+}
+
+/* 水平分隔线：显式覆盖 Tailwind 默认无样式 */
+.knowledge-content hr {
+  margin: 2em 0;
+  border: 0;
+  border-top: 1px solid theme('colors.slate.200');
+}
+
+/* 图片居中且不超过视口宽度，保留渲染器自定义 class 的圆角与阴影 */
+.knowledge-content img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.2em auto;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* 行内图片（跟随文字流）：还原 display */
+.knowledge-content p img,
+.knowledge-content li img,
+.knowledge-content a img {
+  display: inline-block;
+  margin: 0 0.15em;
+  vertical-align: middle;
+  box-shadow: none;
+  border-radius: 4px;
+}
+
+/* 定义列表（GFM/扩展语法会输出）*/
+.knowledge-content dl {
+  margin: 0.8em 0;
+}
+.knowledge-content dt {
+  font-weight: 700;
+  margin-top: 0.4em;
+  color: theme('colors.slate.700');
+}
+.knowledge-content dd {
+  margin: 0.2em 0 0.4em 1.2em;
+  color: theme('colors.slate.600');
+}
+
+/* figure / figcaption（常见 Markdown 扩展）*/
+.knowledge-content figure {
+  margin: 1em 0;
+  text-align: center;
+}
+.knowledge-content figcaption {
+  margin-top: 0.4em;
+  font-size: 0.85em;
+  color: theme('colors.slate.500');
+}
+
+.knowledge-content blockquote {
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  color: theme('colors.slate.600');
+  border-left: 4px solid theme('colors.blue.400');
+  background: rgba(219, 234, 254, 0.5);
+  border-radius: 0 6px 6px 0;
+  font-style: italic;
+}
+
+.knowledge-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 1.2em auto;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.knowledge-content a {
+  color: theme('colors.blue.600');
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.15s;
+}
+
+.knowledge-content a:hover {
+  color: theme('colors.blue.700');
+}
+
+.knowledge-content code {
+  padding: 0.15em 0.4em;
+  font-size: 0.875em;
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  background: theme('colors.slate.100');
+  color: theme('colors.rose.600');
+  border-radius: 4px;
+}
+
+.knowledge-content pre {
+  margin: 1em 0;
+  padding: 1em 1.2em;
+  background: theme('colors.slate.100');
+  border-radius: 8px;
+  overflow-x: auto;
+  font-size: 0.875em;
+  line-height: 1.6;
+}
+
+.knowledge-content pre code {
+  padding: 0;
+  background: transparent;
+  color: theme('colors.slate.800');
+}
+
+.knowledge-content table {
+  width: 100%;
+  margin: 1.2em 0;
+  border-collapse: collapse;
+  font-size: 0.9em;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.knowledge-content th,
+.knowledge-content td {
+  padding: 0.6em 0.9em;
+  border: 1px solid theme('colors.slate.200');
+}
+
+.knowledge-content th {
+  background: theme('colors.slate.50');
+  font-weight: 600;
+  text-align: left;
+}
+
+.knowledge-content hr {
+  margin: 2em 0;
+  border: 0;
+  border-top: 1px solid theme('colors.slate.200');
+}
+
+/* 锚点跳转目标临时高亮 */
+.knowledge-content .knowledge-anchor-target {
+  animation: knowledge-anchor-flash 1.5s ease-out;
+  border-radius: 4px;
+}
+
+@keyframes knowledge-anchor-flash {
+  0%   { background-color: rgba(59, 130, 246, 0.25); }
+  100% { background-color: transparent; }
+}
+
+/* 暗色模式 */
+.dark .knowledge-content {
+  color: theme('colors.slate.300');
+}
+
+.dark .knowledge-content h1 {
+  border-bottom-color: theme('colors.slate.700');
+  color: theme('colors.slate.100');
+}
+
+.dark .knowledge-content h2 {
+  border-bottom-color: theme('colors.slate.700');
+  color: theme('colors.slate.100');
+}
+
+.dark .knowledge-content h3 {
+  color: theme('colors.slate.200');
+}
+
+.dark .knowledge-content blockquote {
+  color: theme('colors.slate.400');
+  border-left-color: theme('colors.blue.500');
+  background: rgba(30, 58, 138, 0.15);
+}
+
+.dark .knowledge-content a {
+  color: theme('colors.blue.400');
+}
+
+.dark .knowledge-content a:hover {
+  color: theme('colors.blue.300');
+}
+
+.dark .knowledge-content code {
+  background: theme('colors.slate.700');
+  color: theme('colors.rose.400');
+}
+
+.dark .knowledge-content pre {
+  background: theme('colors.slate.800');
+}
+
+.dark .knowledge-content pre code {
+  color: theme('colors.slate.200');
+}
+
+.dark .knowledge-content th,
+.dark .knowledge-content td {
+  border-color: theme('colors.slate.600');
+}
+
+.dark .knowledge-content th {
+  background: theme('colors.slate.700');
+  color: theme('colors.slate.200');
+}
+
+.dark .knowledge-content hr {
+  border-top-color: theme('colors.slate.700');
+}
+
+.dark .knowledge-content strong,
+.dark .knowledge-content b,
+.dark .knowledge-content em,
+.dark .knowledge-content i {
+  color: inherit;
+}
+
+.dark .knowledge-content kbd {
+  background: theme('colors.slate.800');
+  border-color: theme('colors.slate.600');
+  color: theme('colors.slate.200');
+}
+
+.dark .knowledge-content small,
+.dark .knowledge-content dd,
+.dark .knowledge-content figcaption {
+  color: theme('colors.slate.400');
+}
+
+.dark .knowledge-content dt {
+  color: theme('colors.slate.200');
+}
+
+.dark .knowledge-content mark {
+  background: theme('colors.yellow.500');
+  color: theme('colors.slate.900');
+}
+
+.virtual-list {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
+}
+
+.virtual-list-item {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 60px;
+}
+
+/* ===== 在线聊天转工单 - 聊天记录样式 ===== */
+@layer components {
+  .chat-transcript {
+    @apply rounded-lg overflow-hidden;
+  }
+
+  .chat-transcript > h3 {
+    @apply flex items-center gap-2 text-base font-semibold;
+    @apply -mx-4 -mt-4 mb-3 px-4 py-2.5;
+    @apply bg-gradient-to-r from-blue-50 to-indigo-50;
+    @apply border-b border-blue-100;
+    @apply text-blue-700;
+    @apply rounded-t-lg;
+  }
+
+  .chat-meta {
+    @apply bg-gray-50 rounded-lg p-3 mb-3;
+    @apply text-xs text-gray-600;
+  }
+
+  .chat-meta p {
+    @apply my-0.5 leading-relaxed;
+  }
+
+  .chat-meta strong {
+    @apply text-gray-800 font-semibold;
+  }
+
+  .chat-transcript hr {
+    @apply my-3 border-0 border-t border-gray-200;
+  }
+
+  .chat-messages {
+    @apply space-y-2.5;
+  }
+
+  .chat-msg {
+    @apply rounded-lg p-2.5 text-sm;
+  }
+
+  .chat-msg-customer {
+    @apply bg-blue-50 border border-blue-100 ml-6;
+  }
+
+  .chat-msg-agent {
+    @apply bg-emerald-50 border border-emerald-100 mr-6;
+  }
+
+  .chat-msg-system {
+    @apply bg-gray-100 text-center text-xs text-gray-500 italic;
+    @apply py-1.5;
+  }
+
+  .chat-msg-header {
+    @apply flex items-center gap-2 mb-1;
+  }
+
+  .chat-time {
+    @apply text-[10px] font-mono text-gray-400;
+  }
+
+  .chat-sender {
+    @apply text-xs font-semibold;
+  }
+
+  .chat-msg-customer .chat-sender {
+    @apply text-blue-700;
+  }
+
+  .chat-msg-agent .chat-sender {
+    @apply text-emerald-700;
+  }
+
+  .chat-content {
+    @apply leading-relaxed break-words;
+  }
+
+  .chat-msg-system .chat-content {
+    @apply inline italic;
+  }
+
+  .chat-msg-system .chat-time {
+    @apply mr-1;
+  }
+}
+
+/* ===== Dark mode overrides for chat transcript ===== */
+.dark .chat-transcript > h3 {
+  @apply from-slate-700 to-slate-700/50;
+  @apply border-slate-600;
+  @apply text-blue-300;
+}
+
+.dark .chat-meta {
+  @apply bg-slate-700/40 text-slate-300;
+}
+
+.dark .chat-meta strong {
+  @apply text-slate-100;
+}
+
+.dark .chat-transcript hr {
+  @apply border-slate-600;
+}
+
+.dark .chat-msg-customer {
+  @apply bg-blue-900/20 border-blue-800/30;
+}
+
+.dark .chat-msg-agent {
+  @apply bg-emerald-900/20 border-emerald-800/30;
+}
+
+.dark .chat-msg-system {
+  @apply bg-slate-700/50 text-slate-400;
+}
+
+.dark .chat-time {
+  @apply text-slate-500;
+}
+
+.dark .chat-msg-customer .chat-sender {
+  @apply text-blue-300;
+}
+
+.dark .chat-msg-agent .chat-sender {
+  @apply text-emerald-300;
+}

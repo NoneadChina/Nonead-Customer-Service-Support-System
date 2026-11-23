@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\NoneadCSS.Api.xml</DocumentationFile>
+    <UserSecretsId>bb628c47-e039-47d1-a866-c39612d8bf06</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.9" />
+    <PackageReference Include="Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore" Version="10.0.9" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.9">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+
+    <PackageReference Include="Microsoft.OpenApi" Version="2.0.0" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.0.7" />
+    <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NoneadCSS.Application\NoneadCSS.Application.csproj" />
+    <ProjectReference Include="..\NoneadCSS.Infrastructure\NoneadCSS.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <!-- OpenAPI 文档国际化词典（中文 -> 英文）：随构建/发布拷贝到输出目录，
+       OpenApiEnglishLocalizer 按 AppContext.BaseDirectory 读取 -->
+  <!-- 后端 API 返回文案的中英词典（出口词典替换用）：必须随 bin/publish 一起产出，
+       否则 ApiMessageLocalizer.LoadStore 找不到文件会静默禁用英文替换。Web SDK 已隐式包含该文件，
+       所以用 Update 附加元数据（用 Include 会报 NETSDK1022 重复项）。 -->
+  <ItemGroup>
+    <Content Update="Localization\api-message-en.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="OpenApi\openapi-en-dictionary.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,20 @@
+<Project>
+
+  <!--
+    统一版本真源。
+
+    - 修改此处版本号时，必须同步：
+        1) CHANGELOG.md 增加对应版本条目
+        2) frontend/package.json 的 version
+        3) git tag（vX.Y.Z）
+    - 程序集 ProductVersion 形如 `2.3.0+<commit-sha>`：SDK 会自动附加 SourceRevisionId，
+      因此 `Production/backend/NoneadCSS.Api.dll` 的 ProductVersion 后缀仍是判断
+      「线上跑的是哪个提交」的可靠依据。
+  -->
+  <PropertyGroup>
+    <Version>2.3.0</Version>
+    <Company>Nonead</Company>
+    <Product>拓德客户服务与支持系统（NoneadCSS）</Product>
+  </PropertyGroup>
+
+</Project>

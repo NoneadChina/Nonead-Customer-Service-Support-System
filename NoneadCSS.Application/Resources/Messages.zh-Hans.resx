@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="LoginFailed" xml:space="preserve"><value>邮箱或密码错误</value></data>
+  <data name="LogoutSuccess" xml:space="preserve"><value>登出成功</value></data>
+  <data name="ConversationNotFound" xml:space="preserve"><value>会话不存在</value></data>
+  <data name="UserNotFound" xml:space="preserve"><value>用户不存在</value></data>
+  <data name="MailboxNotFound" xml:space="preserve"><value>邮箱不存在</value></data>
+  <data name="CustomerNotFound" xml:space="preserve"><value>客户不存在</value></data>
+  <data name="Unauthorized" xml:space="preserve"><value>未授权访问</value></data>
+  <data name="Forbidden" xml:space="preserve"><value>您没有权限执行此操作</value></data>
+  <data name="ValidationError" xml:space="preserve"><value>验证失败</value></data>
+  <data name="EmailAlreadyExists" xml:space="preserve"><value>邮箱已存在</value></data>
+  <data name="ConversationCreated" xml:space="preserve"><value>会话创建成功</value></data>
+  <data name="ConversationUpdated" xml:space="preserve"><value>会话更新成功</value></data>
+  <data name="ConversationDeleted" xml:space="preserve"><value>会话删除成功</value></data>
+  <data name="UserCreated" xml:space="preserve"><value>用户创建成功</value></data>
+  <data name="UserUpdated" xml:space="preserve"><value>用户更新成功</value></data>
+  <data name="UserDeleted" xml:space="preserve"><value>用户删除成功</value></data>
+  <data name="StatusActive" xml:space="preserve"><value>进行中</value></data>
+  <data name="StatusPending" xml:space="preserve"><value>待处理</value></data>
+  <data name="StatusClosed" xml:space="preserve"><value>已关闭</value></data>
+  <data name="StatusSpam" xml:space="preserve"><value>垃圾邮件</value></data>
+  <data name="RoleAdmin" xml:space="preserve"><value>超级管理员</value></data>
+  <data name="RoleUser" xml:space="preserve"><value>只读用户</value></data>
+  <data name="RoleAgentSupervisor" xml:space="preserve"><value>客服主管</value></data>
+  <data name="RoleAgent" xml:space="preserve"><value>客服专员</value></data>
+  <data name="ThreadTypeCustomer" xml:space="preserve"><value>客户消息</value></data>
+  <data name="ThreadTypeMessage" xml:space="preserve"><value>回复</value></data>
+  <data name="ThreadTypeNote" xml:space="preserve"><value>内部备注</value></data>
+  <data name="FolderUnassigned" xml:space="preserve"><value>未分配</value></data>
+  <data name="FolderMine" xml:space="preserve"><value>我的</value></data>
+  <data name="FolderClosed" xml:space="preserve"><value>已关闭</value></data>
+  <data name="WelcomeMessage" xml:space="preserve"><value>欢迎使用 NoneadCSS API</value></data>
+  <data name="ApiDescription" xml:space="preserve"><value>NoneadCSS 客户支持系统 API</value></data>
+  <data name="NoFileSelected" xml:space="preserve"><value>未选择文件</value></data>
+  <data name="AttachmentNotFound" xml:space="preserve"><value>附件不存在</value></data>
+  <data name="FileNotExists" xml:space="preserve"><value>文件不存在</value></data>
+  <data name="InvalidCredentials" xml:space="preserve"><value>凭据无效</value></data>
+  <data name="MailboxAlreadyExists" xml:space="preserve"><value>邮箱已存在</value></data>
+  <data name="MailboxCreated" xml:space="preserve"><value>邮箱创建成功</value></data>
+  <data name="MailboxUpdated" xml:space="preserve"><value>邮箱更新成功</value></data>
+  <data name="MailboxDeleted" xml:space="preserve"><value>邮箱删除成功</value></data>
+  <data name="DraftNotFound" xml:space="preserve"><value>草稿不存在</value></data>
+  <!-- 系统工具（SystemController）：批次 12 后端消息本地化的首批站点。中文值与改造前的字面量逐字一致 -->
+  <data name="SystemCacheCleared" xml:space="preserve"><value>缓存清理完成</value></data>
+  <data name="SystemForceLogoutSuccess" xml:space="preserve"><value>已成功强制 {0} 个用户登出，所有已登录会话将在下次请求时失效</value></data>
+  <data name="SystemClearLogsSuccess" xml:space="preserve"><value>已清空 {0} 个日志文件，释放 {1} 字节</value></data>
+  <data name="SystemClearLogsPartial" xml:space="preserve"><value>已清空 {0} 个日志文件，{1} 个文件被占用暂未清空</value></data>
+  <data name="HealthCheckDbName" xml:space="preserve"><value>数据库连接</value></data>
+  <data name="HealthCheckDbOk" xml:space="preserve"><value>SQLite 连接正常</value></data>
+  <data name="HealthCheckDbFail" xml:space="preserve"><value>数据库连接失败，详见系统日志</value></data>
+  <data name="HealthCheckMailboxName" xml:space="preserve"><value>邮箱配置</value></data>
+  <data name="HealthCheckMailboxOk" xml:space="preserve"><value>共 {0} 个活跃邮箱</value></data>
+  <data name="HealthCheckMailboxFail" xml:space="preserve"><value>邮箱配置查询失败，详见系统日志</value></data>
+  <data name="HealthCheckWebhookName" xml:space="preserve"><value>Webhook配置</value></data>
+  <data name="HealthCheckWebhookOk" xml:space="preserve"><value>共 {0} 个活跃Webhook</value></data>
+  <data name="HealthCheckWebhookFail" xml:space="preserve"><value>Webhook配置查询失败，详见系统日志</value></data>
+  <data name="SystemDbOptimized" xml:space="preserve"><value>数据库优化完成</value></data>
+  <!-- 响应信封：中文值与改造前字面量逐字一致 -->
+  <data name="ApiSuccess" xml:space="preserve"><value>操作成功</value></data>
+  <data name="ApiErrorBadRequest" xml:space="preserve"><value>请求参数错误</value></data>
+  <data name="ApiErrorUnauthorized" xml:space="preserve"><value>未授权</value></data>
+  <data name="ApiErrorForbidden" xml:space="preserve"><value>禁止访问</value></data>
+  <data name="ApiErrorNotFound" xml:space="preserve"><value>资源未找到</value></data>
+  <data name="ApiErrorConflict" xml:space="preserve"><value>资源冲突</value></data>
+  <data name="ApiErrorTooManyRequests" xml:space="preserve"><value>请求过于频繁</value></data>
+  <data name="ApiErrorInternalServer" xml:space="preserve"><value>服务器内部错误</value></data>
+  <data name="ApiErrorGeneric" xml:space="preserve"><value>操作失败</value></data>
+  <data name="AttachmentPreviewImageOnly" xml:space="preserve"><value>仅图片类型支持预览</value></data>
+  <!-- 服务端标签目录（批次 13）：中文值与改造前的代码字面量逐字一致，避免视觉回归 -->
+  <data name="PolicyMinLength" xml:space="preserve"><value>至少 {0} 个字符</value></data>
+  <data name="PolicyRequireUppercase" xml:space="preserve"><value>至少一个大写字母 (A-Z)</value></data>
+  <data name="PolicyRequireLowercase" xml:space="preserve"><value>至少一个小写字母 (a-z)</value></data>
+  <data name="PolicyRequireDigit" xml:space="preserve"><value>至少一个数字 (0-9)</value></data>
+  <data name="PolicyRequireSymbol" xml:space="preserve"><value>至少一个特殊字符 (!@#$%^&amp;*...)</value></data>
+  <data name="PolicyForbidWeakPassword" xml:space="preserve"><value>不能使用常见弱密码</value></data>
+  <data name="PolicyForbidCommonPatterns" xml:space="preserve"><value>不能包含简单模式（连续数字/字母、重复字符、键盘行）</value></data>
+  <data name="SlaViolationTypeFirstResponse" xml:space="preserve"><value>首次响应</value></data>
+  <data name="SlaViolationTypeResolution" xml:space="preserve"><value>解决时长</value></data>
+  <data name="SlaViolationStatusWarning" xml:space="preserve"><value>预警中</value></data>
+  <data name="SlaViolationStatusBreached" xml:space="preserve"><value>已违规</value></data>
+  <data name="SlaViolationStatusResolved" xml:space="preserve"><value>已解决</value></data>
+  <!-- 下拉/概览标签目录 + SLA 时长 + 密码校验失败原因（批次 14）：中文值与改造前的代码字面量逐字一致，避免视觉回归 -->
+  <data name="CalendarEventType_due_date" xml:space="preserve"><value>截止日期</value></data>
+  <data name="CalendarEventType_task" xml:space="preserve"><value>计划任务</value></data>
+  <data name="CalendarEventType_meeting" xml:space="preserve"><value>会议</value></data>
+  <data name="CalendarEventType_reminder" xml:space="preserve"><value>提醒</value></data>
+  <data name="CalendarStatus_pending" xml:space="preserve"><value>待处理</value></data>
+  <data name="CalendarStatus_completed" xml:space="preserve"><value>已完成</value></data>
+  <data name="CalendarStatus_cancelled" xml:space="preserve"><value>已取消</value></data>
+  <data name="KnowledgeStatus_draft" xml:space="preserve"><value>草稿</value></data>
+  <data name="KnowledgeStatus_published" xml:space="preserve"><value>已发布</value></data>
+  <data name="KnowledgeStatus_archived" xml:space="preserve"><value>已归档</value></data>
+  <data name="ChatStatus_waiting" xml:space="preserve"><value>等待接待</value></data>
+  <data name="ChatStatus_active" xml:space="preserve"><value>进行中</value></data>
+  <data name="ChatStatus_closed" xml:space="preserve"><value>已关闭</value></data>
+  <data name="ChatStatus_transferred" xml:space="preserve"><value>已转工单</value></data>
+  <data name="SendLogStatus_1" xml:space="preserve"><value>已接收</value></data>
+  <data name="SendLogStatus_2" xml:space="preserve"><value>发送错误</value></data>
+  <data name="SendLogStatus_4" xml:space="preserve"><value>投递成功</value></data>
+  <data name="SendLogStatus_5" xml:space="preserve"><value>投递失败</value></data>
+  <data name="SendLogStatus_6" xml:space="preserve"><value>已打开</value></data>
+  <data name="SendLogStatus_7" xml:space="preserve"><value>已点击</value></data>
+  <data name="SendLogStatus_8" xml:space="preserve"><value>已退订</value></data>
+  <data name="SendLogStatus_9" xml:space="preserve"><value>已投诉</value></data>
+  <data name="SendLogStatus_10" xml:space="preserve"><value>发送中断</value></data>
+  <data name="SendLogStatus_unknown" xml:space="preserve"><value>未知</value></data>
+  <data name="SendLogMailType_1" xml:space="preserve"><value>客户回复</value></data>
+  <data name="SendLogMailType_2" xml:space="preserve"><value>用户通知</value></data>
+  <data name="SendLogMailType_3" xml:space="preserve"><value>自动回复</value></data>
+  <data name="SendLogMailType_4" xml:space="preserve"><value>邀请</value></data>
+  <data name="SendLogMailType_5" xml:space="preserve"><value>密码修改</value></data>
+  <data name="SendLogMailType_6" xml:space="preserve"><value>错误邮件</value></data>
+  <data name="SendLogMailType_7" xml:space="preserve"><value>测试</value></data>
+  <data name="SendLogMailType_8" xml:space="preserve"><value>警报</value></data>
+  <data name="SendLogMailType_10" xml:space="preserve"><value>日程提醒</value></data>
+  <data name="SendLogMailType_unknown" xml:space="preserve"><value>未知</value></data>
+  <data name="Channel_email" xml:space="preserve"><value>邮件</value></data>
+  <data name="Channel_web" xml:space="preserve"><value>网页</value></data>
+  <data name="Channel_api" xml:space="preserve"><value>API</value></data>
+  <data name="Channel_phone" xml:space="preserve"><value>电话</value></data>
+  <data name="Channel_chat" xml:space="preserve"><value>在线聊天</value></data>
+  <data name="Channel_social" xml:space="preserve"><value>社交</value></data>
+  <data name="Channel_wechat" xml:space="preserve"><value>微信</value></data>
+  <data name="Channel_whatsapp" xml:space="preserve"><value>WhatsApp</value></data>
+  <data name="Channel_feishu" xml:space="preserve"><value>飞书</value></data>
+  <data name="Channel_dingtalk" xml:space="preserve"><value>钉钉</value></data>
+  <data name="Channel_messenger" xml:space="preserve"><value>Messenger</value></data>
+  <data name="Channel_telegram" xml:space="preserve"><value>Telegram</value></data>
+  <data name="Channel_line" xml:space="preserve"><value>LINE</value></data>
+  <data name="Channel_imessage" xml:space="preserve"><value>iMessage</value></data>
+  <data name="Channel_global" xml:space="preserve"><value>全局（所有渠道）</value></data>
+  <data name="SlaDurationZero" xml:space="preserve"><value>0 分钟</value></data>
+  <data name="SlaDurationMinutes" xml:space="preserve"><value>{0} 分钟</value></data>
+  <data name="SlaDurationHours" xml:space="preserve"><value>{0} 小时</value></data>
+  <data name="SlaDurationHoursMinutes" xml:space="preserve"><value>{0} 小时 {1} 分钟</value></data>
+  <data name="SlaDurationDays" xml:space="preserve"><value>{0} 天</value></data>
+  <data name="SlaDurationDaysHours" xml:space="preserve"><value>{0} 天 {1} 小时</value></data>
+  <data name="PolicyErrorMinLength" xml:space="preserve"><value>密码长度至少 {0} 位</value></data>
+  <data name="PolicyErrorRequireUppercase" xml:space="preserve"><value>密码必须包含至少一个大写字母</value></data>
+  <data name="PolicyErrorRequireLowercase" xml:space="preserve"><value>密码必须包含至少一个小写字母</value></data>
+  <data name="PolicyErrorRequireDigit" xml:space="preserve"><value>密码必须包含至少一个数字</value></data>
+  <data name="PolicyErrorRequireSymbol" xml:space="preserve"><value>密码必须包含至少一个特殊字符</value></data>
+  <data name="PolicyErrorTooCommon" xml:space="preserve"><value>密码过于常见，请选择更复杂的密码</value></data>
+  <data name="PolicyErrorWeakPattern" xml:space="preserve"><value>密码包含过于简单的模式，请选择更复杂的密码</value></data>
+  <data name="ImportEntity_customers" xml:space="preserve">
+    <value>客户</value>
+  </data>
+  <data name="ImportEntityDesc_customers" xml:space="preserve">
+    <value>客户联系人信息</value>
+  </data>
+  <data name="ImportEntity_tags" xml:space="preserve">
+    <value>标签</value>
+  </data>
+  <data name="ImportEntityDesc_tags" xml:space="preserve">
+    <value>会话标签</value>
+  </data>
+  <data name="ImportEntity_canned_responses" xml:space="preserve">
+    <value>快捷回复</value>
+  </data>
+  <data name="ImportEntityDesc_canned_responses" xml:space="preserve">
+    <value>快捷回复模板</value>
+  </data>
+  <data name="ImportEntity_mail_templates" xml:space="preserve">
+    <value>邮件模板</value>
+  </data>
+  <data name="ImportEntityDesc_mail_templates" xml:space="preserve">
+    <value>邮件通知模板</value>
+  </data>
+  <data name="ImportEntity_email_signatures" xml:space="preserve">
+    <value>邮件签名</value>
+  </data>
+  <data name="ImportEntityDesc_email_signatures" xml:space="preserve">
+    <value>邮箱签名</value>
+  </data>
+  <data name="ImportEntity_conversations" xml:space="preserve">
+    <value>工单</value>
+  </data>
+  <data name="ImportEntityDesc_conversations" xml:space="preserve">
+    <value>工单列表（不含正文与附件）</value>
+  </data>
+  <data name="ImportEntity_knowledge_articles" xml:space="preserve">
+    <value>知识库文章</value>
+  </data>
+  <data name="ImportEntityDesc_knowledge_articles" xml:space="preserve">
+    <value>文章标题/分类/状态/正文（Markdown 文本）</value>
+  </data>
+  <data name="ImportEntity_users" xml:space="preserve">
+    <value>用户</value>
+  </data>
+  <data name="ImportEntityDesc_users" xml:space="preserve">
+    <value>系统用户</value>
+  </data>
+  <data name="CalendarSubscriptionInstructions" xml:space="preserve">
+    <value>在 Outlook 中：文件 → 打开和导出 → 管理订阅 → 添加订阅 → 粘贴此 URL。注意：此 URL 包含订阅令牌，请勿分享给他人。</value>
+  </data>
+</root>

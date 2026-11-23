@@ -1,0 +1,97 @@
+import type { Entries } from '../../i18n/types';
+
+/**
+ * 认证页文案（登录 / 注册 / 找回密码 / 重置密码）。
+ * 抽取自 `pages/Login.tsx`、`Register.tsx`、`ForgotPassword.tsx`、`ResetPassword.tsx`。
+ */
+export const auth = {
+  // ── 四个认证页共用 ──
+  'auth.common.backToLogin': '返回登录',
+  'auth.common.goToLogin': '前往登录',
+  'auth.common.showPassword': '显示密码',
+  'auth.common.hidePassword': '隐藏密码',
+  'auth.common.emailLabel': '邮箱账号',
+  'auth.common.emailPlaceholder': '请输入您的邮箱',
+  'auth.common.passwordMismatch': '两次输入的密码不一致',
+  'auth.common.validationErrorSeparator': '；',
+  'auth.common.passwordMinLengthPlaceholder': '至少 {min} 位',
+  'auth.common.networkError': '网络错误，请稍后重试',
+  'auth.common.loading': '加载中...',
+
+  // ── 登录 ──
+  'auth.login.title': '拓德客户服务与支持系统',
+  // 副标题：中文界面沿用既有的英文品牌行（与 h1 不重复）
+  'auth.login.tagline': 'Nonead Customer Service & Support System',
+  'auth.login.passwordLabel': '登录密码',
+  'auth.login.passwordPlaceholder': '请输入您的密码',
+  'auth.login.captchaLabel': '图形验证码',
+  'auth.login.captchaPlaceholder': '请输入验证码',
+  'auth.login.refreshCaptcha': '刷新验证码',
+  'auth.login.captchaRefreshHint': '点击刷新验证码',
+  'auth.login.captchaHelp': '看不清？点击验证码图片刷新',
+  'auth.login.forgotPasswordLink': '忘记密码？',
+  'auth.login.submit': '立即登录',
+  'auth.login.submitting': '登录中...',
+  'auth.login.registerLink': '还没有账号？立即注册',
+  'auth.login.captchaFailed': '获取验证码失败，请刷新页面重试',
+  'auth.login.captchaBackendDown': '无法连接后端服务（连接被拒绝或 502）。请先启动 API（scripts/dev-up.ps1），再点击验证码图片重试。',
+  'auth.login.failed': '登录失败，请检查账号密码',
+
+  // ── 注册 ──
+  'auth.register.title': '创建新账号',
+  'auth.register.subtitle': '填写以下信息完成注册',
+  'auth.register.firstNameLabel': '名',
+  'auth.register.firstNamePlaceholder': '名',
+  'auth.register.lastNameLabel': '姓',
+  'auth.register.lastNamePlaceholder': '姓',
+  'auth.register.passwordLabel': '设置密码',
+  'auth.register.confirmPasswordLabel': '确认密码',
+  'auth.register.confirmPasswordPlaceholder': '请再次输入密码',
+  'auth.register.passwordMatch': '密码一致',
+  'auth.register.submit': '立即注册',
+  'auth.register.submitting': '注册中...',
+  'auth.register.haveAccount': '已有账号？',
+  'auth.register.nameRequired': '请填写姓名',
+  'auth.register.emailRequired': '请输入邮箱',
+  'auth.register.failed': '注册失败',
+  'auth.register.failedRetry': '注册失败，请稍后重试',
+  'auth.register.disabledTitle': '注册功能未开放',
+  'auth.register.disabledNote': '当前系统暂未开放用户自助注册。',
+  'auth.register.disabledContactAdmin': '如需注册账号，请联系系统管理员。',
+  'auth.register.successTitle': '注册成功',
+  'auth.register.successSubmitted': '您的账号已提交注册申请',
+  'auth.register.successPending': '请等待管理员审核并激活您的账号后，即可登录使用系统。',
+
+  // ── 找回密码 ──
+  'auth.forgot.title': '忘记密码',
+  'auth.forgot.subtitle': '输入您的姓名和邮箱，验证后将发送密码重置链接',
+  'auth.forgot.securityBadge': '安全重置流程',
+  'auth.forgot.firstNameLabel': '名',
+  'auth.forgot.firstNamePlaceholder': '请输入名',
+  'auth.forgot.lastNameLabel': '姓',
+  'auth.forgot.lastNamePlaceholder': '请输入姓',
+  'auth.forgot.emailLabel': '邮箱',
+  'auth.forgot.emailPlaceholder': '请输入邮箱地址',
+  'auth.forgot.submit': '发送重置链接',
+  'auth.forgot.submitting': '发送中...',
+  'auth.forgot.requestFailed': '请求失败',
+  'auth.forgot.successBadge': '安全验证通过',
+  'auth.forgot.successTitle': '重置链接已发送',
+  'auth.forgot.successSentTo': '密码重置链接已发送到',
+  'auth.forgot.successTipExpiry': '请查收邮件并在 24 小时内完成密码重置',
+  'auth.forgot.successTipSpam': '如果未收到邮件，请检查垃圾邮件文件夹',
+  'auth.forgot.successTipSingleUse': '重置链接仅可使用一次，请妥善保管',
+
+  // ── 重置密码 ──
+  'auth.reset.title': '重置密码',
+  'auth.reset.subtitle': '输入您的新密码',
+  'auth.reset.newPasswordLabel': '新密码',
+  'auth.reset.confirmPasswordLabel': '确认密码',
+  'auth.reset.confirmPasswordPlaceholder': '请再次输入新密码',
+  'auth.reset.submit': '重置密码',
+  'auth.reset.submitting': '重置中...',
+  'auth.reset.invalidToken': '无效的令牌，请重新请求密码重置',
+  'auth.reset.failed': '重置失败',
+  'auth.reset.successTitle': '密码重置成功',
+  'auth.reset.successDescription': '您的密码已成功重置，现在可以使用新密码登录',
+} satisfies Entries;

@@ -1,0 +1,201 @@
+/* =========================================================
+   Calendar P0 UX Phase 2 — 动画 tokens / keyframes / 密度变量 / badge 类
+   被 index.css @import 引入
+   ========================================================= */
+
+/* --- 动画时长与曲线 tokens --- */
+:root {
+  --cal-dur-fast: 120ms;
+  --cal-dur-normal: 180ms;
+  --cal-dur-slow: 240ms;
+  --cal-ease: cubic-bezier(0.2, 0, 0, 1);
+  --cal-ease-out: cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* --- 移动端密度变量（默认桌面） --- */
+:root {
+  --cal-grid-gap: 2px;
+  --cal-cell-py: 10px;
+  --cal-chip-text: 11px;
+  --cal-chip-px: 6px;
+  --cal-chip-py: 2px;
+  --cal-hour-h: 56px;
+  --cal-weekhead-py: 8px;
+}
+
+@media (max-width: 767.98px) {
+  :root {
+    --cal-grid-gap: 1px;
+    --cal-cell-py: 6px;
+    --cal-chip-text: 10px;
+    --cal-chip-px: 4px;
+    --cal-chip-py: 1px;
+    --cal-hour-h: 44px;
+    --cal-weekhead-py: 4px;
+  }
+}
+
+/* --- Keyframes --- */
+@keyframes cal-pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4); }
+  100% { box-shadow: 0 0 0 8px rgba(56, 189, 248, 0); }
+}
+
+@keyframes cal-fade-in-up {
+  0%   { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cal-slide-in-right {
+  0%   { opacity: 0; transform: translateX(8px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes cal-pop-in {
+  0%   { opacity: 0; transform: translateY(8px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes cal-pop-out {
+  0%   { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(4px) scale(0.98); }
+}
+
+/* --- 交互增强-2: 事件悬浮预览卡片淡入（保留 translate-x-1/2 居中） --- */
+@keyframes cal-tooltip-in {
+  0%   { opacity: 0; transform: translate(-50%, -4px) scale(0.96); }
+  100% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+}
+
+/* --- 冲突 badge 类：更大更清晰，配合 cal-chips-scroller 的 clip-margin 不被裁剪 --- */
+.cal-conflict-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 16px;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 10;
+  border: 1.5px solid #ffffff;
+}
+.dark .cal-conflict-badge {
+  border-color: #0f172a;
+}
+.cal-conflict-badge.hard {
+  background: #f43f5e;
+  color: white;
+  box-shadow: 0 2px 6px rgba(244,63,94,0.45), inset 0 0 0 1px rgba(255,255,255,0.15);
+}
+.cal-conflict-badge.soft {
+  background: #f59e0b;
+  color: #1c1917;
+  box-shadow: 0 2px 6px rgba(245,158,11,0.4), inset 0 0 0 1px rgba(255,255,255,0.2);
+}
+
+/* --- 事件容器：允许 badge 外凸 8px 不被裁剪，同时保持内容裁剪以避免单元格撑破 --- */
+.cal-chips-scroller {
+  overflow: clip;
+  overflow-clip-margin: 8px;
+}
+
+/* --- 交互增强-2: hover 时临时允许 scroller 溢出，让悬浮预览卡片完整显示 --- */
+.cal-chips-scroller.cal-scroller-hovering {
+  overflow: visible;
+  overflow-clip-margin: 0;
+}
+
+/* --- 交互增强-2: hover 时临时提升 DayCell 层级，覆盖有 z-10 的今日/光标格 --- */
+.cal-day-cell.cal-daycell-hovering {
+  z-index: 20 !important;
+}
+
+/* --- 日格日期徽章右上角"当日存在硬冲突"红点：放在徽章外上角，不与文字争抢空间 --- */
+.cal-date-conflict-dot {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: #f43f5e;
+  box-shadow:
+    0 0 0 2px #ffffff,
+    0 1px 4px rgba(244,63,94,0.5);
+}
+.dark .cal-date-conflict-dot {
+  box-shadow:
+    0 0 0 2px #0f172a,
+    0 1px 4px rgba(244,63,94,0.6);
+}
+
+/* --- hover 时弹出的 mini 文字提示 --- */
+.cal-chip-hoverhint {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 10px;
+  line-height: 1;
+  padding: 4px 8px;
+  background: rgba(15, 23, 42, 0.9);
+  color: white;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 120ms ease;
+  z-index: 40;
+}
+.group:hover > .cal-chip-hoverhint,
+.group:focus-within > .cal-chip-hoverhint {
+  opacity: 1;
+}
+
+/* --- 交互增强-2: 事件悬浮预览卡片（pointer-events-none，不干扰点击/拖拽） --- */
+.cal-hovercard {
+  animation: cal-tooltip-in 160ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* --- 交互增强-2: 实时时间线脉冲效果 --- */
+@keyframes cal-now-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.4); }
+  50%      { box-shadow: 0 0 0 4px rgba(244, 63, 94, 0); }
+}
+.cal-now-line-dot {
+  animation: cal-now-pulse 2s ease-in-out infinite;
+}
+
+/* --- 交互增强-3: 事件 resize 手柄 --- */
+.cal-resize-handle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  cursor: ns-resize;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+  background: transparent;
+  transition: background 120ms ease;
+}
+.cal-resize-handle:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* --- 无障碍：尊重 prefers-reduced-motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

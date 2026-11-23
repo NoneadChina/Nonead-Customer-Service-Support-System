@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- H-03 CSP nonce：此 meta 标签仅作开发环境的兜底与语义声明。
+         生产 / 非开发环境下，SecurityHeadersMiddleware 会在 HTTP 响应头中写入更强的
+         nonce-based CSP（script-src/style-src 使用每次请求生成的随机 nonce），
+         并将下方 __CSP_NONCE__ 占位符替换为真实 nonce，浏览器取两者中"更严格者"生效。 -->
+    <meta http-equiv="Content-Security-Policy"
+          data-csp-nonce-slot="__CSP_NONCE__"
+          content="default-src 'self'; script-src 'self' 'nonce-__CSP_NONCE__'; style-src 'self' 'nonce-__CSP_NONCE__'; img-src 'self' data: https:; connect-src 'self' wss: ws:; font-src 'self' data:;" />
+    <!-- 双语静态标题：JS 就绪前的兜底（首帧之前没有 JS 能改它）。
+         就绪后由 I18nProvider 按界面语言覆盖为单一语言（`common.shell.documentTitle`）。 -->
+    <title>拓德客户服务与支持系统 - Nonead Customer Service & Support System</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" nonce="__CSP_NONCE__" src="/src/main.tsx"></script>
+  </body>
+</html>

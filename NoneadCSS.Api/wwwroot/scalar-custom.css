@@ -1,0 +1,387 @@
+/* ========================================================================
+   NoneadCSS Scalar API 文档自定义主题增强
+   - 在 Scalar 内置主题基础上进一步美化
+   - 增强圆角、阴影、过渡动效
+   - 美化 HTTP 方法标签、按钮、输入框、代码块等组件
+   ======================================================================== */
+
+/* ---------- 全局增强 ---------- */
+
+/* 页面整体字体优化 */
+html,
+body {
+  font-family: var(--scalar-font), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 滚动条美化 */
+::-webkit-scrollbar {
+  width: 8px !important;
+  height: 8px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scalar-background-1) !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scalar-background-3) !important;
+  border-radius: 4px !important;
+  transition: background 0.2s ease !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scalar-color-3) !important;
+}
+
+/* ---------- 侧边栏美化 ---------- */
+
+.t-doc__sidebar {
+  border-right: 1px solid var(--scalar-border-color) !important;
+}
+
+/* 侧边栏顶部 Logo 区域 */
+.t-doc__sidebar::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 72px;
+  background-image: url('/logo.svg');
+  background-repeat: no-repeat;
+  background-position: 24px center;
+  background-size: auto 40px;
+  border-bottom: 1px solid var(--scalar-border-color);
+  flex-shrink: 0;
+}
+
+/* 确保侧边栏使用 flex 布局，Logo 不被挤压 */
+.t-doc__sidebar {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* 侧边栏分组标题 */
+.sidebar-section-label,
+.t-doc__sidebar [class*='section-label'],
+.t-doc__sidebar [class*='group-title'] {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  color: var(--scalar-color-3) !important;
+  padding: 16px 16px 8px !important;
+}
+
+/* 侧边栏菜单项 */
+.t-doc__sidebar a,
+.t-doc__sidebar .sidebar-item,
+.t-doc__sidebar [class*='sidebar-link'],
+.t-doc__sidebar [class*='item'] {
+  border-radius: 6px !important;
+  margin: 2px 8px !important;
+  padding: 8px 12px !important;
+  transition: all 0.2s ease !important;
+  font-size: 13px !important;
+}
+
+.t-doc__sidebar a:hover,
+.t-doc__sidebar .sidebar-item:hover,
+.t-doc__sidebar [class*='sidebar-link']:hover,
+.t-doc__sidebar [class*='item']:hover {
+  background: var(--scalar-background-3) !important;
+  color: var(--scalar-color-1) !important;
+}
+
+.t-doc__sidebar a.active,
+.t-doc__sidebar .sidebar-item.active,
+.t-doc__sidebar [class*='sidebar-link'].active,
+.t-doc__sidebar [class*='item'].active {
+  background: var(--scalar-background-accent) !important;
+  color: var(--scalar-color-accent) !important;
+  font-weight: 600 !important;
+}
+
+/* ---------- API 操作卡片美化 ---------- */
+
+.t-doc__operation,
+.operation-item,
+[class*='operation-item'] {
+  border-radius: 12px !important;
+  border: 1px solid var(--scalar-border-color) !important;
+  background: var(--scalar-background-2) !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  margin-bottom: 12px !important;
+  overflow: hidden !important;
+}
+
+.t-doc__operation:hover,
+.operation-item:hover,
+[class*='operation-item']:hover {
+  border-color: var(--scalar-color-accent) !important;
+  box-shadow: 0 4px 24px var(--scalar-background-accent) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ---------- HTTP 方法标签增强 ---------- */
+
+/* GET - 绿色渐变 */
+.badge.get,
+.badge--get,
+.http-method.get,
+[data-method='get'] .badge,
+[data-method='get'] .http-method,
+[data-method='GET'] .badge,
+[data-method='GET'] .http-method {
+  background: linear-gradient(135deg, #059669, #10b981) !important;
+  color: white !important;
+  border: none !important;
+  font-weight: 600 !important;
+  padding: 2px 10px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3) !important;
+}
+
+/* POST - 蓝色渐变 */
+.badge.post,
+.badge--post,
+.http-method.post,
+[data-method='post'] .badge,
+[data-method='post'] .http-method,
+[data-method='POST'] .badge,
+[data-method='POST'] .http-method {
+  background: linear-gradient(135deg, #2563eb, #3b82f6) !important;
+  color: white !important;
+  border: none !important;
+  font-weight: 600 !important;
+  padding: 2px 10px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3) !important;
+}
+
+/* PUT - 橙色渐变 */
+.badge.put,
+.badge--put,
+.http-method.put,
+[data-method='put'] .badge,
+[data-method='put'] .http-method,
+[data-method='PUT'] .badge,
+[data-method='PUT'] .http-method {
+  background: linear-gradient(135deg, #d97706, #f59e0b) !important;
+  color: white !important;
+  border: none !important;
+  font-weight: 600 !important;
+  padding: 2px 10px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3) !important;
+}
+
+/* DELETE - 红色渐变 */
+.badge.delete,
+.badge--delete,
+.http-method.delete,
+[data-method='delete'] .badge,
+[data-method='delete'] .http-method,
+[data-method='DELETE'] .badge,
+[data-method='DELETE'] .http-method {
+  background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+  color: white !important;
+  border: none !important;
+  font-weight: 600 !important;
+  padding: 2px 10px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.3) !important;
+}
+
+/* PATCH - 紫色渐变 */
+.badge.patch,
+.badge--patch,
+.http-method.patch,
+[data-method='patch'] .badge,
+[data-method='patch'] .http-method,
+[data-method='PATCH'] .badge,
+[data-method='PATCH'] .http-method {
+  background: linear-gradient(135deg, #7c3aed, #8b5cf6) !important;
+  color: white !important;
+  border: none !important;
+  font-weight: 600 !important;
+  padding: 2px 10px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3) !important;
+}
+
+/* ---------- 代码块/编辑器美化 ---------- */
+
+.cm-editor,
+.code-block,
+pre code,
+[class*='code-block'] {
+  border-radius: 10px !important;
+  border: 1px solid var(--scalar-border-color) !important;
+  overflow: hidden !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ---------- 按钮美化 ---------- */
+
+button,
+.btn,
+.button {
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  cursor: pointer !important;
+}
+
+button:hover,
+.btn:hover,
+.button:hover {
+  transform: translateY(-1px) !important;
+}
+
+button:active,
+.btn:active,
+.button:active {
+  transform: translateY(0) !important;
+}
+
+/* 主按钮渐变效果 */
+.btn.primary,
+.button.primary,
+button.primary,
+.btn--primary,
+[class*='primary-btn'],
+[class*='btn-primary'] {
+  background: linear-gradient(135deg, var(--scalar-color-accent), #8b5cf6) !important;
+  color: white !important;
+  border: none !important;
+}
+
+.btn.primary:hover,
+.button.primary:hover,
+button.primary:hover {
+  box-shadow: 0 6px 20px var(--scalar-background-accent) !important;
+  color: white !important;
+}
+
+/* ---------- 输入框美化 ---------- */
+
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='number'],
+input[type='search'],
+input[type='url'],
+textarea,
+select,
+.input,
+[class*='input'] {
+  border-radius: 8px !important;
+  border: 1px solid var(--scalar-border-color) !important;
+  background: var(--scalar-background-1) !important;
+  color: var(--scalar-color-1) !important;
+  transition: all 0.2s ease !important;
+}
+
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='email']:focus,
+input[type='number']:focus,
+input[type='search']:focus,
+input[type='url']:focus,
+textarea:focus,
+select:focus,
+.input:focus,
+[class*='input']:focus {
+  outline: none !important;
+  border-color: var(--scalar-color-accent) !important;
+  box-shadow: 0 0 0 3px var(--scalar-background-accent) !important;
+}
+
+/* ---------- 搜索框美化 ---------- */
+
+.search-input,
+#search-input,
+[class*='search-input'] {
+  border-radius: 10px !important;
+}
+
+/* ---------- Tabs/标签页美化 ---------- */
+
+.tab,
+[role='tab'],
+[class*='tab-item'] {
+  border-bottom: 2px solid transparent !important;
+  color: var(--scalar-color-2) !important;
+  transition: all 0.2s ease !important;
+  font-weight: 500 !important;
+}
+
+.tab.active,
+[role='tab'][aria-selected='true'],
+[class*='tab-item'].active {
+  color: var(--scalar-color-accent) !important;
+  border-bottom-color: var(--scalar-color-accent) !important;
+}
+
+.tab:hover,
+[role='tab']:hover,
+[class*='tab-item']:hover {
+  color: var(--scalar-color-1) !important;
+}
+
+/* ---------- 标签/徽章美化 ---------- */
+
+.badge,
+.tag {
+  border-radius: 6px !important;
+  font-weight: 500 !important;
+}
+
+/* ---------- 卡片组件美化 ---------- */
+
+.card,
+.panel,
+[class*='card'],
+[class*='panel'] {
+  border-radius: 12px !important;
+  border: 1px solid var(--scalar-border-color) !important;
+  background: var(--scalar-background-2) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* ---------- 表格美化 ---------- */
+
+table {
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  border: 1px solid var(--scalar-border-color) !important;
+}
+
+th {
+  background: var(--scalar-background-3) !important;
+  font-weight: 600 !important;
+}
+
+td,
+th {
+  border-color: var(--scalar-border-color) !important;
+}
+
+/* ---------- 分隔线 ---------- */
+
+hr,
+.divider,
+.separator,
+[class*='divider'],
+[class*='separator'] {
+  border-color: var(--scalar-border-color) !important;
+}
+
+/* ---------- 响应式调整 ---------- */
+
+@media (max-width: 768px) {
+  .t-doc__sidebar {
+    width: 100% !important;
+  }
+}

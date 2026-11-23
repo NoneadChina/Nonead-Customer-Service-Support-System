@@ -1,0 +1,6 @@
+@NoneadCSS.Api_HostAddress = http://localhost:5009
+
+GET {{NoneadCSS.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

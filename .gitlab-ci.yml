@@ -1,0 +1,111 @@
+# NoneadCSS CI/CD
+#
+# 覆盖范围（2026-09-21 补齐）：
+#   1. 后端：Release 编译 + 全量单元测试 + 覆盖率采集 + 覆盖率门槛
+#   2. 前端：TypeScript 类型检查 + Vite 生产构建 + vitest 单元测试
+#   3. 部署：手动触发的生产部署（需带 prod 标签的 Windows runner）
+#
+# 背景：原配置是 GitLab 官方 .NET 模板原样（仅 build+test，deploy 为 echo 占位），
+# 前端完全没有纳入 CI——tsc / vite build / vitest 都不跑，回归只能靠人工发现。
+
+image: mcr.microsoft.com/dotnet/sdk:10.0
+
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  OBJECTS_DIRECTORY: 'obj'
+  NUGET_PACKAGES_DIRECTORY: '.nuget'
+  SOURCE_CODE_PATH: '*/*/'
+  # 覆盖率门槛：以 **Application 层** 为准（业务逻辑所在，且不受 EF 迁移代码稀释）。
+  # 为什么不看全局值：全局 line-rate 仅 6.05%，因为分母含 ~15.6 万行自动生成的 EF 迁移；
+  # Application 层当前 43.06%（Domain 42.7% / Api 2.8% / Infrastructure 1.4%）。
+  # 先设 40% 防止塌方；待补测（WorkflowService/各 IngestionService 等热点为 0% 覆盖）后逐步上调。
+  COVERAGE_MIN_APPLICATION_LINE_RATE: '0.40'
+
+cache:
+  key: "$CI_JOB_STAGE-$CI_COMMIT_REF_SLUG"
+  paths:
+    - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/project.assets.json'
+    - '$SOURCE_CODE_PATH$OBJECTS_DIRECTORY/*.csproj.nuget.*'
+    - '$NUGET_PACKAGES_DIRECTORY'
+
+before_script:
+  - 'dotnet restore --packages $NUGET_PACKAGES_DIRECTORY'
+
+# === 后端：编译 ===
+build:
+  stage: build
+  script:
+    - 'dotnet build --no-restore -c Release'
+
+# === 后端：测试 + 覆盖率门槛 ===
+tests:
+  stage: test
+  script:
+    - 'dotnet test --no-restore -c Release --logger "trx;LogFileName=backend.trx" --collect:"XPlat Code Coverage" --results-directory TestResults'
+    # 覆盖率门槛：逐程序集打点，并以 Application 层作为门禁指标
+    - |
+      COV=$(find TestResults -name 'coverage.cobertura.xml' | head -1)
+      if [ -z "$COV" ]; then echo "FAIL: 未找到覆盖率报告 coverage.cobertura.xml"; exit 1; fi
+      for p in Api Application Domain Infrastructure; do
+        rate=$(grep -o "<package name=\"NoneadCSS.$p\"[^>]*line-rate=\"[0-9.]*\"" "$COV" | grep -o 'line-rate="[0-9.]*"' | head -1 | sed 's/[^0-9.]//g')
+        echo "包覆盖率 NoneadCSS.$p = $rate"
+      done
+      GLOBAL=$(grep -o 'line-rate="[0-9.]*"' "$COV" | head -1 | sed 's/[^0-9.]//g')
+      APP=$(grep -o '<package name="NoneadCSS.Application"[^>]*line-rate="[0-9.]*"' "$COV" | grep -o 'line-rate="[0-9.]*"' | head -1 | sed 's/[^0-9.]//g')
+      echo "全局行覆盖率: $GLOBAL（分母含 EF 迁移代码，仅供参考，不作为门槛）"
+      echo "Application 行覆盖率: $APP (门槛 $COVERAGE_MIN_APPLICATION_LINE_RATE)"
+      if [ -z "$APP" ]; then echo "FAIL: 未能从覆盖率报告中解析 Application 层覆盖率"; exit 1; fi
+      awk -v r="$APP" -v min="$COVERAGE_MIN_APPLICATION_LINE_RATE" 'BEGIN { if (r+0 < min+0) { printf "FAIL: Application 行覆盖率 %.2f%% 低于门槛 %.2f%%\n", r*100, min*100; exit 1 } }'
+  coverage: '/Application 行覆盖率: ([0-9.]+)/'
+  artifacts:
+    when: always
+    expire_in: 7 days
+    paths:
+      - TestResults/
+    reports:
+      junit: TestResults/**/*.trx
+
+# === 前端：类型检查 + i18n 门禁 + 测试 + 构建 ===
+frontend:
+  stage: test
+  image: node:24
+  cache:
+    key: "frontend-$CI_COMMIT_REF_SLUG"
+    paths:
+      - frontend/node_modules/
+  before_script:
+    - 'cd frontend && npm ci'
+  script:
+    # 1) 类型检查：i18n 真源"漏翻=编译错误"的保证由它兑现
+    - 'cd frontend && npx tsc -b'
+    # 2) 硬编码中文基线门禁：只允许"不比基线更差"（基线文件随仓库提交）
+    - 'cd frontend && npm run i18n:check'
+    # 3) 单元测试：含 locales 中英 key 对齐门禁与逐模块丢键护栏
+    - 'cd frontend && npx vitest run'
+    # 4) 生产构建
+    - 'cd frontend && npm run build'
+  artifacts:
+    when: always
+    expire_in: 7 days
+    paths:
+      - frontend/dist/
+
+# === 部署：手动触发，需 Windows runner ===
+# 生产实际由 Windows 主机上的 Production/start-prod.ps1 完成
+# （停服务 → publish → 迁移前冷备 → 启动 → 健康检查）。
+# 本作业不自动执行，避免"提交即上线"。
+deploy:production:
+  stage: deploy
+  tags:
+    - prod
+    - windows
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      when: manual
+      allow_failure: false
+  script:
+    - 'powershell.exe -ExecutionPolicy Bypass -File Production/start-prod.ps1'
